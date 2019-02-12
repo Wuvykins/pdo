@@ -17,7 +17,7 @@ catch(PDOException $e)
     echo $e->getMessage();
 }
 //define the query
-$sql= "INSERT INTO pets(type,name, color)
+/*$sql= "INSERT INTO pets(type,name, color)
         VALUES(:type,:name, :color)";
 
 //Prepare the statement
@@ -35,3 +35,17 @@ $statement->bindParam(':color', $color, PDO::PARAM_STR);
 $statement->execute();
 $id = $dbh->lastInsertId();
 echo "<p>Pet $id inserted successfully.</p>";
+*/
+//Define the query
+$sql= "UPDATE pets SET color = :new WHERE name = :name AND type = :type ";
+//Prepare the statement
+$statement = $dbh->prepare($sql);
+//Bind the parameters
+$new = 'brown';
+$name = 'Oscar';
+$type = "alpaca";
+$statement->bindParam(':new', $new, PDO::PARAM_STR);
+$statement->bindParam(':name', $name, PDO::PARAM_STR);
+$statement->bindParam(':type', $type, PDO::PARAM_STR);
+//Execute
+$statement->execute();
