@@ -24,12 +24,14 @@ $sql= "INSERT INTO pets(type,name, color)
 $statement = $dbh->prepare($sql);
 
 //Bind the parameters
-$type = 'kangaroo';
-$name = 'Joey';
-$color = 'purple';
+$type = 'wolf';
+$name = 'Yuki';
+$color = 'white';
 $statement->bindParam(':type', $type, PDO::PARAM_STR);
 $statement->bindParam(':name', $name, PDO::PARAM_STR);
 $statement->bindParam(':color', $color, PDO::PARAM_STR);
 
 //Execute
 $statement->execute();
+$id = $dbh->lastInsertId();
+echo "<p>Pet $id inserted successfully.</p>";
